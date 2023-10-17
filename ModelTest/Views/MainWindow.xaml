@@ -4,33 +4,58 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ModelTest.ViewModels"
+        xmlns:uc="clr-namespace:ModelTest.UserControls"
         xmlns:local="clr-namespace:ModelTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
+        Title="MainWindow" Height="300" Width="600">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <StackPanel Orientation="Horizontal">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Val" HorizontalAlignment="Right" Margin="10"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Model.Val}" Margin="10"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="Val" HorizontalAlignment="Right" Margin="10"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Model.Val}" Margin="10"/>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Seed" HorizontalAlignment="Right" Margin="10"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Model.Seed}" Margin="10"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Seed" HorizontalAlignment="Right" Margin="10"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Model.Seed}" Margin="10"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="{Binding Model.Val}" Margin="10"/>
-        <Label Grid.Row="2" Grid.Column="1" Content="{Binding Model.Seed}" Margin="10"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="{Binding Model.Val}" Margin="10"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Model.Seed}" Margin="10"/>
 
-        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Message}" HorizontalAlignment="Center" Margin="10"/>
-    </Grid>
+            <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Message}" HorizontalAlignment="Center" Margin="10"/>
+        </Grid>
+
+        <Grid Width="200">
+            <Canvas Background="Azure">
+                <Polygon Points="20,15 12,15 24,3 -35,3 -35,-3 24,-3 12,-15 20,-15 35,0 20,15"
+                         Stroke="Black"
+                         Fill="DimGray"
+                         Canvas.Left="90"
+                         Canvas.Top="150">
+                    <Polygon.RenderTransform>
+                        <RotateTransform Angle="{Binding Angle}" CenterX="0" CenterY="0"/>
+                    </Polygon.RenderTransform>
+                </Polygon>
+
+                <uc:Compass Angle="{Binding NegAngle}" Scale="1" Canvas.Left="90" Canvas.Top="75"/>
+
+            </Canvas>
+
+            <TextBox Text="{Binding Angle, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Margin="5"/>
+            
+        </Grid>
+        
+    </StackPanel>
+    
 </Window>
